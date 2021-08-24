@@ -41,7 +41,7 @@ namespace ResultChecker.Pages.Student
 
             applicationUser =await userManager.GetUserAsync(User);
 
-            var query = dbContext.CourseRegs
+            vwCourses = dbContext.CourseRegs
             .Join(
                 dbContext.Courses,
                 reg => reg.CourseCode,
@@ -58,9 +58,9 @@ namespace ResultChecker.Pages.Student
                     SubmittedBy = reg.SubmittedBy,
                     
                 }
-            ).ToList().Where(x => x.SubmittedBy == User.Identity.Name.ToString() && x.Session == Session && x.Semester == Semester);
+            ).ToList().Where(x => x.SubmittedBy == User.Identity.Name && x.Session.ToLower() == Session && x.Semester.ToLower() == Semester);
 
-            vwCourses = query;
+           // vwCourses = query;
             return Page();
         }
     }

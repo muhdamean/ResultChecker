@@ -171,21 +171,19 @@
                                             </li>*@
                                         @if (signInManager.IsSignedIn(User))
                                         {
-                                            <li>
+                                            @*<li>
                                                 <a href="#">LogOut <i class="icofont-rounded-down"></i></a>
                                                 <ul class="dropdown">
                                                     <li>
-                                                        <form method="post" asp-page="logout" >
+                                                        <form method="post" asp-page="/index" >
                                                             <button type="submit" class="btn-link nav-link justify-content-center">LogOut</button>
                                                         </form>
                                                     </li>
                                                 </ul>
-                                            </li>
-                                            if (User.IsInRole("User"))
-                                            {
-                                                <li><a asp-page="/admin/index" >Dashboard</a></li>
-                                            }
-
+                                            </li>*@
+                                           
+                                            <li><a asp-page="account/login">LogIn</a></li>
+                                          
                                         }
                                         else
                                         {
