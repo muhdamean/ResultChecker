@@ -1,0 +1,40 @@
+﻿@page "{id:alpha}"
+@model ResultChecker.Pages.Admin.ManageUserRolesModel
+@{
+    ViewBag.Title = "Manage Roles";
+}
+
+@if (TempData["message"] != null)
+{
+    <div classs="container p-0 ">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["message"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+}
+<h5>Manage Staff Roles</h5>
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+            <h6>Add or Remove Roles</h6>
+        </div>
+        <div class="card-body">
+            @for (int i = 0; i < Model.UserRolesList.Count; i++)
+            {
+                <div class="form-check m-1:">
+                    <input asp-for="@Model.UserRolesList[i].RoleId" hidden />
+                    <input asp-for="@Model.UserRolesList[i].RoleName" hidden />
+                    <input asp-for="@Model.UserRolesList[i].IsSelected" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@Model.UserRolesList[i].IsSelected">@Model.UserRolesList[i].RoleName</label>
+                </div>
+            }
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary btn-sm" style="width:auto">Update</button>
+            <a asp-action="editstaff" asp-route-id="@Model.Id" class="btn btn-info btn-sm">Cancel</a>
+        </div>
+    </div>
+</form>

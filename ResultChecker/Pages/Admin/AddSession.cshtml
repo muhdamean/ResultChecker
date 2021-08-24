@@ -1,0 +1,40 @@
+﻿@page
+@model ResultChecker.Pages.Admin.AddSessionModel
+@{
+    ViewBag.Title = "Add Session";
+}
+<div class="row">
+    <div class="col-sm-6">
+        <h5 class="h5">Create New Session</h5>
+        <form method="post">
+            <div class="form-group">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <label asp-for="sessionTerm.Session" class="col-form-label"></label>
+                <input asp-for="sessionTerm.Session" class="form-control" />
+                <span asp-validation-for="sessionTerm.Session" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="sessionTerm.Semester" class="col-form-label"></label>
+                <input asp-for="sessionTerm.Semester" class="form-control" />
+                <span asp-validation-for="sessionTerm.Semester" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sessionTerm.DateBegin" class="col-form-label"></label>
+                <input asp-for="sessionTerm.DateBegin" class="form-control" />
+                <span asp-validation-for="sessionTerm.DateBegin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sessionTerm.DateEnd" class="col-form-label"></label>
+                <input asp-for="sessionTerm.DateEnd" class="form-control" />
+                <span asp-validation-for="sessionTerm.DateEnd" class="text-danger"></span>
+            </div>*@
+            @*<div class="form-group">
+                <label asp-for="sessionTerm.IsActive" class="col-form-label"></label>
+                <input asp-for="sessionTerm.IsActive" class="checkbox-default" />
+                <span asp-validation-for="sessionTerm.IsActive" class="text-danger"></span>
+            </div>*@
+            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+            <a asp-page="sessionSemesters" class="btn btn-info btn-sm">Cancel</a>
+        </form>
+    </div>
+</div>

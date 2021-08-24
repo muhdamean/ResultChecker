@@ -1,0 +1,41 @@
+﻿@page
+@model ResultChecker.Pages.Admin.EditCourseLecturerModel
+@{
+    ViewBag.Title = "Edit Course Lecturer";
+}
+<div class="row">
+    <div class="col-sm-6">
+        <h5 class="h5">Update Course Lecturer</h5>
+        <form method="post">
+            <div class="form-group">
+                <input asp-for="CourseLecturer.Id" hidden class="form-control" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <label asp-for="CourseLecturer.UserId" class="col-form-label"></label>
+                @Html.DropDownListFor(x => Model.CourseLecturer.UserId, new SelectList(Model.StaffList, "Value", "Text", Model.CourseLecturer.UserId), htmlAttributes: new { @class = "form-control" })
+                <span asp-validation-for="CourseLecturer.UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseLecturer.Session" class="col-form-label"></label>
+                @Html.DropDownListFor(x => Model.CourseLecturer.Session, new SelectList(Model.SessionList, "Value", "Text", Model.CourseLecturer.Session), htmlAttributes: new { @class = "form-control" })
+                <span asp-validation-for="CourseLecturer.Session" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseLecturer.Course" class="col-form-label"></label>
+                @Html.DropDownListFor(x => Model.CourseLecturer.Course, new SelectList(Model.ClassList, "Value", "Text", Model.CourseLecturer.Course), htmlAttributes: new { @class = "form-control" })
+                <span asp-validation-for="CourseLecturer.Course" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseLecturer.SubmittedBy" class="col-form-label"></label>
+                <input asp-for="CourseLecturer.SubmittedBy" readonly class="form-control" />
+                <span asp-validation-for="CourseLecturer.SubmittedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseLecturer.DateCreated" class="col-form-label"></label>
+                <input asp-for="CourseLecturer.DateCreated" readonly class="form-control" />
+                <span asp-validation-for="CourseLecturer.DateCreated" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Update</button>
+            <a asp-page="CourseLecturers" class="btn btn-info btn-sm">Cancel</a>
+        </form>
+    </div>
+</div>

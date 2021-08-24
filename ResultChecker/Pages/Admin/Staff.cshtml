@@ -1,0 +1,119 @@
+﻿@page
+@model ResultChecker.Pages.Admin.StaffModel
+@{
+    ViewBag.Title = "Staff";
+    int SN = 0;
+}
+
+<div class="col-sm-12">
+    @if (TempData["message"] != null)
+    {
+        <div classs="container p-0 ">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["message"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    }
+    @if (Model.Users.Any())
+    {
+        <!-- Hover table card start -->
+        <div class="card">
+            <div class="card-header">
+                <h5>Staff</h5>
+                <span class="txt-muted">List of staff. </span><a asp-page="addstaff"><strong>Add New Staff</strong></a>
+                <div class="card-header-right">
+                    <ul class="list-unstyled card-option">
+                        <li><i class="fa fa-chevron-left"></i></li>
+                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                        <li><i class="fa fa-minus minimize-card"></i></li>
+                        <li><i class="fa fa-refresh reload-card"></i></li>
+                        <li><i class="fa fa-times close-card"></i></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="card-block table-border-style">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <td>#</td>
+                                <td>Name</td>
+                                <td>Email</td>
+                                <td>Phone Number</td>
+                                <td>Department</td>
+                                <td>Edit/Delete</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model.Users)
+                            {
+                                <tr>
+                                    <td >@(++SN)</td>
+                                    <td>@user.FullName</td>
+                                    <td>@user.Email</td>
+                                    <td>@user.PhoneNumber</td>
+                                    <td>@user.Department</td>
+                                    <td>
+                                        <form asp-action="deleteUser" asp-route-id="@user.Id" method="post">
+                                            @*@if ((await authorizationService.AuthorizeAsync(User, "EditRolePolicy")).Succeeded)
+                                                {*@
+                                            <a asp-page="../admin/staffdetail" asp-route-id="@user.Id" class="btn btn-primary btn-sm mr-2">View</a>
+                                            @*}*@
+
+                                            <span id="confirmDeleteSpan_@user.Id" style="display:none;">
+                                                <span>Confirm delete?</span>
+                                                <button type="submit" class="btn btn-danger btn-sm">Yes</button>
+                                                <a href="#" class="btn btn-primary btn-sm" onclick="confirmDelete('@user.Id', false);">No</a>
+                                            </span>
+                                            <span id="deleteSpan_@user.Id">
+                                                <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@user.Id', true);">Delete</a>
+                                            </span>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header">
+                No staff created yet
+                @TempData["m"]
+            </div>
+            <div class="card-body">
+                Use the button below to add staff
+                @TempData["message"]
+            </div>
+            <div class="card-footer">
+                <a asp-page="../admin/addStaff" class="btn btn-primary btn-sm">Add Staff</a>
+            </div>
+        </div>
+    }
+
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        function confirmDelete(uniqueId, isDeleteClicked) {
+            var deleteSpan = 'deleteSpan_' + uniqueId;
+            var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+            if (isDeleteClicked) {
+                $('#' + deleteSpan).hide();
+                $('#' + confirmDeleteSpan).show();
+            }
+            else {
+                $('#' + deleteSpan).show();
+                $('#' + confirmDeleteSpan).hide();
+            }
+        }
+    </script>
+}

@@ -1,0 +1,104 @@
+﻿@page
+@model ResultChecker.Pages.Admin.RolesModel
+@{
+    ViewBag.Title = "Roles";
+    int SN = 0;
+}
+
+<div class="col-sm-8">
+    @if (Model.Roles.Any())
+    {
+        @if (TempData["message"] != null)
+        {
+            <div classs="container p-0 ">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["message"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        }
+        <!-- Hover table card start -->
+        <div class="card">
+            <div class="card-header">
+                <h5>Roles</h5>
+                <span class="txt-muted">List of roles available. </span><a asp-page="CreateRole"><strong>Create New Role</strong></a>
+                <div class="card-header-right">
+                    <ul class="list-unstyled card-option">
+                        <li><i class="fa fa-chevron-left"></i></li>
+                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                        <li><i class="fa fa-minus minimize-card"></i></li>
+                        <li><i class="fa fa-refresh reload-card"></i></li>
+                        <li><i class="fa fa-times close-card"></i></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="card-block table-border-style">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Role</th>
+                                <th>Edit/Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Roles)
+                            {
+                                <tr>
+                                    <td>@(++SN)</td>
+                                    <td>@item.Name</td>
+                                    <td>
+                                        <form asp-page="roles" asp-route-id="@item.Id" method="post" >
+                                            <a asp-page="createrole" asp-route-id="@item.Id" class="btn btn-sm btn-success btn-outline-success mr-3"><i class="icofont icofont-ui-edit"></i></a>
+                                            <span id="confirmDeleteSpan_@item.Id" style="display:none;">
+                                                <span>Confirm delete?</span>
+                                                <button type="submit" class="btn btn-danger btn-sm">Yes</button>
+                                                <a href="#" class="btn btn-primary btn-sm" onclick="confirmDelete('@item.Id', false);">No</a>
+                                            </span>
+                                            <span id="deleteSpan_@item.Id">
+                                                <a href="#" class="btn btn-sm btn-danger btn-outline-danger" onclick="confirmDelete('@item.Id', true);"><i class="icofont icofont-delete-alt"></i></a>
+
+                                            </span>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Hover table card end -->
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header">
+                <h5>Roles</h5>
+            </div>
+            <div class="card-block table-border-style">
+                No roles available, <a asp-page="CreateRole">click here to add new role</a>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        function confirmDelete(uniqueId, isDeleteClicked) {
+            var deleteSpan = 'deleteSpan_' + uniqueId;
+            var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+            if (isDeleteClicked) {
+                $('#' + deleteSpan).hide();
+                $('#' + confirmDeleteSpan).show();
+            }
+            else {
+                $('#' + deleteSpan).show();
+                $('#' + confirmDeleteSpan).hide();
+            }
+        }
+    </script>
+}

@@ -1,0 +1,116 @@
+﻿@page
+@model ResultChecker.Pages.Admin.CoursesModel
+@{
+    ViewBag.Title = "Courses";
+    int SN = 0;
+}
+
+<div class="col-sm-12">
+    @if (Model.Courses.Any())
+    {
+        @if (TempData["message"] != null)
+        {
+            <div classs="container p-0 ">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["message"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        }
+        <!-- Hover table card start -->
+        <div class="card">
+            <div class="card-header">
+                <h5>Courses</h5>
+                <span class="txt-muted">List of coures available. </span><a asp-page="addcourse"><strong>Create New Course</strong></a>
+                <div class="card-header-right">
+                    <ul class="list-unstyled card-option">
+                        <li><i class="fa fa-chevron-left"></i></li>
+                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                        <li><i class="fa fa-minus minimize-card"></i></li>
+                        <li><i class="fa fa-refresh reload-card"></i></li>
+                        <li><i class="fa fa-times close-card"></i></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="card-block table-border-style">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Unit</th>
+                                <th>Semester</th>
+                                <th>IsActive</th>
+                                @*<th>SubmittedBy</th>*@
+                                <th>Date</th>
+                                <th>Edit/Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Courses)
+                            {
+                                <tr>
+                                    <td>@(++SN)</td>
+                                    <td>@item.CourseCode</td>
+                                    <td>@item.CourseTitle</td>
+                                    <td>@item.CourseUnit</td>
+                                    <td>@item.Semester</td>
+                                    <td>@item.IsActive</td>
+                                    @*<td>@item.SubmittedBy</td>*@
+                                    <td>@item.DateSubmitted.ToShortDateString()</td>
+                                    <td>
+                                        <form asp-page="courses" asp-route-id="@item.Id" method="post">
+                                            <a asp-page="editcourse" asp-route-id="@item.Id" class="btn btn-sm btn-success btn-outline-success mr-3"><i class="icofont icofont-ui-edit"></i></a>
+                                            <span id="confirmDeleteSpan_@item.Id" style="display:none;">
+                                                <span>Confirm delete?</span>
+                                                <button type="submit" class="btn btn-danger btn-sm">Yes</button>
+                                                <a href="#" class="btn btn-primary btn-sm" onclick="confirmDelete('@item.Id', false);">No</a>
+                                            </span>
+                                            <span id="deleteSpan_@item.Id">
+                                                <a href="#" class="btn btn-sm btn-danger btn-outline-danger" onclick="confirmDelete('@item.Id', true);"><i class="icofont icofont-delete-alt"></i></a>
+
+                                            </span>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Hover table card end -->
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header">
+                <h5>Course</h5>
+            </div>
+            <div class="card-block table-border-style">
+                No courses available, <a asp-page="addcourse">click here to add new course</a>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        function confirmDelete(uniqueId, isDeleteClicked) {
+            var deleteSpan = 'deleteSpan_' + uniqueId;
+            var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+            if (isDeleteClicked) {
+                $('#' + deleteSpan).hide();
+                $('#' + confirmDeleteSpan).show();
+            }
+            else {
+                $('#' + deleteSpan).show();
+                $('#' + confirmDeleteSpan).hide();
+            }
+        }
+    </script>
+}

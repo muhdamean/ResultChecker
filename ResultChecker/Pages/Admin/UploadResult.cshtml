@@ -1,0 +1,195 @@
+﻿@page
+@model ResultChecker.Pages.Admin.UploadResultModel
+@*@inject IAntiforgery antiforgery
+@{
+    var token = antiforgery.GetAndStoreTokens(HttpContext).RequestToken;
+}*@
+@{
+    ViewBag.Title = "Upload Result";
+}
+
+<div class="col-sm-12">
+    @if (TempData["message"] != null)
+    {
+        <div classs="container p-0 ">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["message"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    }
+<form method="post" enctype="multipart/form-data">
+    <div class="row mb-2">
+
+        <div class="col-md-4">
+            @Html.DropDownListFor(x => Model.ResultUpload.Session, new SelectList(Model.SessionList, "Value", "Text", ""), htmlAttributes: new { @class = "form-control", id = "Session" })
+            <span asp-validation-for="ResultUpload.Session" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            @Html.DropDownListFor(x => Model.ResultUpload.Semester, new SelectList(Model.SemesterList, "Value", "Text", ""), htmlAttributes: new { @class = "form-control", id = "Semester" })
+            <span asp-validation-for="ResultUpload.Semester" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <input asp-for="Upload" class="form-control" />
+            <small>Upload  csv file to preview and confirm result upload</small>
+        </div>
+        <div class="col-md-3">
+            <input type="submit" value="Upload" class="btn btn-sm btn-primary" />
+            <a asp-page="/index" class="btn btn-sm btn-danger mr-1">Cancel</a>
+        </div>
+    </div>
+    <input type="hidden" id="txtData" asp-for="ConfirmResultUpload" />
+    @if (TempData["upload"] != null)
+    {
+        @if (Model.MyResults.Any())
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Result Upload</h5>
+                            <span class="txt-muted">Result upload preview. </span>
+                            @*<button type="button" id="btnConfirmUpload" class="btn btn-sm btn-primary" ><strong>Confirm Upload</strong></button>*@
+                            <span id="confirmDeleteSpan_" style="display:none;">
+                                <span>Confirm upload?</span>
+                                <button type="submit" asp-page-handler="ConfirmUpload" class="btn btn-danger btn-sm">Yes</button>
+                                <a href="#" class="btn btn-primary btn-sm" onclick="confirmDelete(false);">No</a>
+                            </span>
+                            <span id="deleteSpan_">
+                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(true);">Confirm</button>
+                            </span>
+
+                            <div class="card-header-right">
+                                <ul class="list-unstyled card-option">
+                                    <li><i class="fa fa-chevron-left"></i></li>
+                                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                                    <li><i class="fa fa-minus minimize-card"></i></li>
+                                    <li><i class="fa fa-refresh reload-card"></i></li>
+                                    <li><i class="fa fa-times close-card"></i></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="card-block table-border-style">
+                            <div class="table-responsive">
+                                <table id="tbUploadResult" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>MatNo</th>
+                                            <th>CourseCode</th>
+                                            <th>Score</th>
+                                            <th>Unit</th>
+                                            <th>Point</th>
+                                            <th>Grade</th>
+                                            <th>GPA</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var student in Model.MyResults)
+                                        {
+                                        <tr>
+                                            <td>@student.MatNo</td>
+                                            <td>@student.CourseCode</td>
+                                            <td>@student.Score</td>
+                                            <td>@student.Unit</td>
+                                            <td>@student.Points</td>
+                                            <td>@student.Grade</td>
+                                            <td>@student.GPA</td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</form>
+</div>
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $("body").on("click", "#btnConfirmUpload", function () {
+            //Loop through the Table rows and build a JSON array.
+            //var allrows = new Array();
+            //$("#tbUploadResult TBODY TR").each(function () {
+            //    var row = $(this);
+            //    var rowdata = {};
+            //    rowdata.MatNo = row.find("TD").eq(0).html();
+            //    rowdata.CourseCode = row.find("TD").eq(1).html();
+            //    rowdata.Score = row.find("TD").eq(2).html();
+            //    rowdata.Unit = row.find("TD").eq(3).html();
+            //    rowdata.Points = row.find("TD").eq(4).html();
+            //    rowdata.Grade = row.find("TD").eq(5).html();
+            //    rowdata.GPA = row.find("TD").eq(6).html();
+            //    allrows.push(rowdata);
+            //});
+            ////allrows.shift();
+            //if (allrows!=null) {
+            //    return allrows;
+            //}
+
+
+            //alert(JSON.stringify(allrows));
+            //var value="hey"
+            //Send the JSON array to Controller using AJAX.
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/admin/uploadresult?handler=ConfirmUpload",
+            //    beforeSend: function (xhr) {
+            //        xhr.setRequestHeader("XSRF-TOKEN",
+            //            $('input:hidden[name="__RequestVerificationToken"]').val());
+            //    },
+            //    //headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+            //    data: JSON.stringify({ Foo: value }),
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    success: function (r) {
+            //        alert(r);
+            //    }
+            //});
+        });
+
+        function confirmDelete(isDeleteClicked) {
+            var deleteSpan = 'deleteSpan_';
+            var confirmDeleteSpan = 'confirmDeleteSpan_';
+
+            var allrows = new Array();
+            $("#tbUploadResult TBODY TR").each(function () {
+                var row = $(this);
+                var rowdata = {};
+                rowdata.MatNo = row.find("TD").eq(0).html();
+                rowdata.CourseCode = row.find("TD").eq(1).html();
+                rowdata.Score = row.find("TD").eq(2).html();
+                rowdata.Unit = row.find("TD").eq(3).html();
+                rowdata.Points = row.find("TD").eq(4).html();
+                rowdata.Grade = row.find("TD").eq(5).html();
+                rowdata.GPA = row.find("TD").eq(6).html();
+                allrows.push(rowdata);
+            });
+            //allrows.shift();
+           // document.getElementById("txtData").classList.remove("invisible")
+            document.getElementById("txtData").value = JSON.stringify(allrows);
+            //let rowData = document.getElementById("txtData").value;
+            //alert("hey " + document.getElementById("txtData").value);
+
+            if (isDeleteClicked) {
+                $('#' + deleteSpan).hide();
+                $('#' + confirmDeleteSpan).show();
+               
+            }
+            else {
+                $('#' + deleteSpan).show();
+                $('#' + confirmDeleteSpan).hide();
+            }
+        }
+    </script>
+}

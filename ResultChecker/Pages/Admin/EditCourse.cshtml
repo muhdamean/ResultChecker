@@ -1,0 +1,51 @@
+﻿@page "{id:min(1)}"
+@model ResultChecker.Pages.Admin.EditCourseModel
+@{
+    ViewBag.Title = "Edit Course";
+}
+<div class="row">
+    <div class="col-sm-6">
+        <h5 class="h5">Update Course</h5>
+        <form method="post">
+            <div class="form-group">
+                <input asp-for="Courses.Id" hidden class="form-control" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <label asp-for="Courses.CourseCode" class="col-form-label"></label>
+                <input asp-for="Courses.CourseCode" class="form-control" />
+                <span asp-validation-for="Courses.CourseCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Courses.CourseTitle" class="col-form-label"></label>
+                <input asp-for="Courses.CourseTitle" class="form-control" />
+                <span asp-validation-for="Courses.CourseTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Courses.CourseUnit" class="col-form-label"></label>
+                <input asp-for="Courses.CourseUnit" class="form-control" />
+                <span asp-validation-for="Courses.CourseUnit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Courses.Semester" class="col-form-label"></label>
+                @Html.DropDownListFor(x => Model.Courses.Semester, new SelectList(Model.SessionList, "Value", "Text", Model.Courses.Semester), htmlAttributes: new { @class = "form-control" })
+                <span asp-validation-for="Courses.Semester" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Courses.SubmittedBy" class="col-form-label"></label>
+                <input asp-for="Courses.SubmittedBy" readonly class="form-control" />
+                <span asp-validation-for="Courses.SubmittedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Courses.DateSubmitted" class="col-form-label"></label>
+                <input asp-for="Courses.DateSubmitted" class="form-control" />
+                <span asp-validation-for="Courses.DateSubmitted" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Courses.IsActive" class="col-form-label"></label>
+                <input asp-for="Courses.IsActive" class="checkbox-default" />
+                <span asp-validation-for="Courses.IsActive" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+            <a asp-page="courses" class="btn btn-info btn-sm">Cancel</a>
+        </form>
+    </div>
+</div>

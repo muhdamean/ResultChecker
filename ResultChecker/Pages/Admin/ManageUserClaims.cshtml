@@ -1,0 +1,39 @@
+﻿@page "{id:alpha}"
+@model ResultChecker.Pages.Admin.ManageUserClaimsModel
+@{
+    ViewBag.Title = "Manage Claims";
+}
+
+@if (TempData["message"] != null)
+{
+    <div classs="container p-0 ">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["message"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+}
+<h5>Manage User Claims</h5>
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+            <h4>Add or Remove Claims</h4>
+        </div>
+        <div class="card-body">
+            @for (int i = 0; i < Model.UserClaimList.Count; i++)
+            {
+                <div class="form-check m-1">
+                    <input asp-for="@Model.UserClaimList[i].ClaimType" type="hidden" />
+                    <input asp-for="@Model.UserClaimList[i].IsSelected" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@Model.UserClaimList[i].IsSelected">@Model.UserClaimList[i].ClaimType</label>
+                </div>
+            }
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary btn-sm">Update</button>
+            <a asp-action="editstaff" asp-route-id="@Model.Id" class="btn btn-info btn-sm">Cancel</a>
+        </div>
+    </div>
+</form>

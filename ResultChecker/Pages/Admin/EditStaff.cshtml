@@ -1,0 +1,208 @@
+﻿@page "{id:alpha}"
+@model ResultChecker.Pages.Admin.EditStaffModel
+@{
+    ViewBag.Title = "Edit Staff";
+    var photoPath = "~/images/" + (Model.OldPhoto ?? "unknown-doctor.jpg");
+}
+<div class="row">
+    <div class="col-sm-6">
+        <h5 class="h5">Update Staff</h5>
+        <form method="post" enctype="multipart/form-data" class="mt-2">
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.StaffID" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ApplicationUsers.StaffID" class="form-control" />
+                    <span asp-validation-for="ApplicationUsers.StaffID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.Email" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ApplicationUsers.Email" class="form-control" />
+                    <span asp-validation-for="ApplicationUsers.Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.FirstName" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ApplicationUsers.FirstName" class="form-control" />
+                    <span asp-validation-for="ApplicationUsers.FirstName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.LastName" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ApplicationUsers.LastName" class="form-control" />
+                    <span asp-validation-for="ApplicationUsers.LastName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.MiddleName" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ApplicationUsers.MiddleName" class="form-control" />
+                    <span asp-validation-for="ApplicationUsers.MiddleName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.PhoneNumber" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ApplicationUsers.PhoneNumber" class="form-control" />
+                    <span asp-validation-for="ApplicationUsers.PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.DOB" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ApplicationUsers.DOB" class="form-control" />
+                    <span asp-validation-for="ApplicationUsers.DOB" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.Gender" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(x => Model.ApplicationUsers.Gender, new SelectList(Model.GenderList, "Value", "Text", ""), htmlAttributes: new { @class = "form-control" })
+                    <span asp-validation-for="ApplicationUsers.Gender" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.Religion" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <select asp-for="ApplicationUsers.Religion" class="form-control">
+                        <option value="">Select Religion</option>
+                        <option value="Islam">Islam</option>
+                        <option value="Christianity">Christianity</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <span asp-validation-for="ApplicationUsers.Religion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.Tribe" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ApplicationUsers.Tribe" class="form-control" />
+                    <span asp-validation-for="ApplicationUsers.Tribe" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.Qualification" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ApplicationUsers.Qualification" class="form-control" />
+                    <span asp-validation-for="ApplicationUsers.Qualification" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.Department" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(x => Model.ApplicationUsers.Department, new SelectList(Model.DeptList, "Value", "Text", ""), htmlAttributes: new { @class = "form-control" })
+                    <span asp-validation-for="ApplicationUsers.Department" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.State" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    @*<input asp-for="State" class="form-control" />*@
+                    @Html.DropDownListFor(x => Model.ApplicationUsers.State, new SelectList(Model.StateList, "Value", "Text", ""), htmlAttributes: new { @class = "form-control", id = "State" })
+                    <span asp-validation-for="ApplicationUsers.State" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.LGA" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <select asp-for="ApplicationUsers.LGA" asp-items="Model.LgaList" class="form-control" id="lga">
+                    </select>
+                    <span asp-validation-for="ApplicationUsers.LGA" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.Address" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ApplicationUsers.Address" class="form-control" />
+                    <span asp-validation-for="ApplicationUsers.Address" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.Role" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(x => Model.ApplicationUsers.Role, new SelectList(Model.RoleList, "Value", "Text", ""), htmlAttributes: new { @class = "form-control", id = "Role" })
+                    <span asp-validation-for="ApplicationUsers.Role" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.Hobbies" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ApplicationUsers.Hobbies" class="form-control" />
+                    <span asp-validation-for="ApplicationUsers.Hobbies" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.NOKName" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ApplicationUsers.NOKName" class="form-control" />
+                    <span asp-validation-for="ApplicationUsers.NOKName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.NOKPhone" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ApplicationUsers.NOKPhone" class="form-control" />
+                    <span asp-validation-for="ApplicationUsers.NOKPhone" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.NOKAddress" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ApplicationUsers.NOKAddress" class="form-control" />
+                    <span asp-validation-for="ApplicationUsers.NOKAddress" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ApplicationUsers.Passport" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ApplicationUsers.Passport" accept="image/*" class="form-control" />
+                    <span asp-validation-for="ApplicationUsers.Passport" class="text-danger"></span>
+                </div>
+            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group row">
+                <div class="col-sm-10 offset-2">
+                    <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                    <a asp-action="staffs" class="btn btn-warning btn-sm">Cancel</a>
+                </div>
+            </div>
+        </form>       
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var state = $("#State");
+            var lga = $("#lga");
+            lga.prop('disabled', true);
+
+            state.change(function () {
+                if ($(this).val() == "") {
+                    lga.append($('<option>', { value: '', text: '---- Select LGA ----' }, '</option>'));
+                    lga.prop('disabled', true);
+                    lga.val("");
+                }
+                else {
+                    $.getJSON("/GetLga", { state: $(this).val() }, function (data) {
+                        lga.prop('disabled', false);
+                        lga.empty();
+                        lga.append($('<option>', { value: '0', text: '---- Select LGA ----' }, '</option>'));
+                        $.each(data, function (index, lgas) {
+                            lga.append($('<option/>',
+                                {
+                                    value: lgas.value,
+                                    text: lgas.text,
+                                }));
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+}

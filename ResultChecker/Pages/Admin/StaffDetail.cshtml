@@ -1,0 +1,125 @@
+﻿@page
+@model ResultChecker.Pages.Admin.StaffDetailModel
+@{
+    ViewBag.Title = "Staff Profile";
+    var photoPath = "~/images/" + (Model.Users.Passport ?? "unknown-doctor.jpg");
+    @*"{id:alpha}"*@
+}
+<div class="">
+    <h5 class="h5">Staff Profile</h5>
+    <div class="card-header">
+        Profile Details
+    </div>
+    <div class="card-body">
+        <div class="form-group row" hidden>
+            <input asp-for="@Model.Users.Id" readonly class="form-control" />
+            <input asp-for="@Model.Users.Email" readonly class="form-control" />
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Users.FirstName" class="col-form-label col-sm-2"></label>
+            <div class="col-sm-10">
+                <label class="col-form-label">@Model.Users.FirstName </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Users.LastName" class="col-form-label col-sm-2"></label>
+            <div class="col-sm-10">
+                <label class="col-form-label">@Model.Users.LastName </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Users.MiddleName" class="col-form-label col-sm-2"></label>
+            <div class="col-sm-10">
+                <label class="col-form-label">@Model.Users.MiddleName </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Users.PhoneNumber" class="col-form-label col-sm-2"></label>
+            <div class="col-sm-10">
+                <label class="col-form-label">@Model.Users.PhoneNumber  </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Users.Email" class="col-form-label col-sm-2"></label>
+            <div class="col-sm-10">
+                <label class="col-form-label ">@Model.Users.Email  </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Users.Gender" class="col-form-label col-sm-2"></label>
+            <div class="col-sm-10">
+                <label class="col-form-label">@Model.Users.Gender  </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Users.DOB" class="col-form-label col-sm-2"></label>
+            <div class="col-sm-10">
+                <label class="col-form-label">@Model.Users.DOB.Date.ToShortDateString()  </label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="@Model.Users.Department" class="col-form-label col-sm-2"></label>
+            <div class="col-sm-10">
+                <label class="col-form-label">@Model.Users.Department  </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Users.Qualification" class="col-form-label col-sm-2"></label>
+            <div class="col-sm-10">
+                <label class="col-form-label">@Model.Users.Qualification  </label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="@Model.Users.Role" class="col-form-label col-sm-2"></label>
+            <div class="col-sm-10">
+                <label class="col-form-label">@Model.Users.Role  </label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="@Model.Users.LGA" class="col-form-label col-sm-2"></label>
+            <div class="col-sm-10">
+                <label class="col-form-label">@Model.Users.LGA  </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Users.Address" class="col-form-label col-sm-2"></label>
+            <div class="col-sm-10">
+                <label class="col-form-label">@Model.Users.Address  </label>
+            </div>
+        </div>
+        <hr />
+        <div class="form-group row">
+            <label asp-for="@Model.Users.NOKName" class="col-form-label col-sm-2"></label>
+            <div class="col-sm-10">
+                <label class="col-form-label">@Model.Users.NOKName  </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Users.NOKPhone" class="col-form-label col-sm-2"></label>
+            <div class="col-sm-10">
+                <label class="col-form-label">@Model.Users.NOKPhone  </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Users.NOKAddress" class="col-form-label col-sm-2"></label>
+            <div class="col-sm-10">
+                <label class="col-form-label">@Model.Users.NOKAddress  </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2">Passport</label>
+            <div class="col-sm-10">
+                <img src="@photoPath" asp-append-version="true" width="200" height="200" />
+            </div>
+        </div>
+        @*<div asp-validation-summary="All" class="text-danger"></div>*@
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <a asp-page="../admin/editstaff" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Edit</a>
+            </div>
+        </div>
+    </div>
+</div>
