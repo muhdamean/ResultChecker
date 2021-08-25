@@ -41,7 +41,7 @@ namespace ResultChecker.Pages.Admin
             SessionList.Insert(0, new SelectListItem("Select Session", ""));
             //ClassList = dbContext.Classes.AsNoTracking().Select(x => new SelectListItem { Text = x.Name + " - " + x.Description, Value = x.Id.ToString() }).Distinct().ToList();
             //ClassList.Insert(0, new SelectListItem("Select Class", ""));
-            SubjectList = dbContext.Courses.AsNoTracking().Select(x => new SelectListItem { Text = x.CourseCode + " - " + x.CourseTitle, Value = x.Id.ToString() }).Distinct().ToList();
+            SubjectList = dbContext.Courses.AsNoTracking().Select(x => new SelectListItem { Text = x.CourseCode + " - " + x.CourseTitle, Value = x.CourseCode }).Distinct().ToList();
             SubjectList.Insert(0, new SelectListItem("Select Course", ""));
         }
         public async Task<IActionResult> OnPostAsync()

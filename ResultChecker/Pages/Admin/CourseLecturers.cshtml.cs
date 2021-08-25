@@ -50,17 +50,17 @@ namespace ResultChecker.Pages.Admin
             if (check == null)
             {
                 TempData["message"] = $"record not found";
-                return RedirectToPage("subjectTeachers");
+                return RedirectToPage("courselecturers");
             }
             dbContext.CourseLecturers.Remove(check);
             var result = await dbContext.SaveChangesAsync();
             if (result > 0)
             {
-                TempData["message"] = $"Subject Teacher deleted successfully";
-                return RedirectToPage("subjectTeachers");
+                TempData["message"] = $"Course lecturer deleted successfully";
+                return RedirectToPage("courselecturers");
             }
             TempData["message"] = $"error, try again";
-            return RedirectToPage("subjectTeachers");
+            return RedirectToPage("courselecturers");
         }
     }
 }

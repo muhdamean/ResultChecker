@@ -53,11 +53,11 @@ namespace ResultChecker.Pages.Student
         }
        public async Task<IActionResult> OnPost()
        {
-           var check= await dbContext.CourseRegs.FirstOrDefaultAsync(x => x.CourseCode == CourseRegs.CourseCode && x.Session == CourseRegs.Session);
+           var check= await dbContext.CourseRegs.FirstOrDefaultAsync(x => x.CourseCode == CourseRegs.CourseCode && x.Session == CourseRegs.Session && x.SubmittedBy==User.Identity.Name);
             if (check!=null)
             {
                 TempData["message"] = "Course registered for this session already";
-                return Page();
+                return RedirectToPage("myCourseReg");
             }
 
             var newCourseReg = new CourseReg
@@ -67,6 +67,7 @@ namespace ResultChecker.Pages.Student
                 CourseCode = CourseRegs.CourseCode,
                 Year = CourseRegs.Year,
                 SubmittedBy = User.Identity.Name
+
                 
             };
             dbContext.CourseRegs.Add(newCourseReg);

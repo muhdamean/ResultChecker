@@ -46,7 +46,7 @@
                                 <th>Semester</th>
                                 <th>Session</th>
                                 <th>Year</th>
-                                <th>Date</th>
+                                @*<th>Date</th>*@
                                 <th>Edit/Delete</th>
                             </tr>
                         </thead>
@@ -60,7 +60,7 @@
                                     <td>@item.Session</td>
                                     <td>@item.Year</td>
                                     @*<td>@item.SubmittedBy</td>*@
-                                    <td>@item.DateSubmitted.ToShortDateString()</td>
+                                    @*<td>@item.DateSubmitted.ToShortDateString()</td>*@
                                     <td>
                                         <form asp-page="courses" asp-route-id="@item.Id" method="post">
                                             <a asp-page="editcourse" asp-route-id="@item.Id" class="btn btn-sm btn-success btn-outline-success mr-3"><i class="icofont icofont-ui-edit"></i></a>

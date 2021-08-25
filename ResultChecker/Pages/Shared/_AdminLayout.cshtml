@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a asp-page="/admin/index" >Result Checker
+                        <a asp-page="/index" >Result Checker
                             @*<img class="img-fluid" src="~/assets/images/logo.png" alt="Theme-Logo" />*@
                         </a>
                         <a class="mobile-options">
@@ -171,59 +171,59 @@
                                     </a>
                                 </li>
                                 @*@if (User.IsInRole("Admin") || User.IsInRole("HOD"))
-                                {*@
-                                    <li class="pcoded-hasmenu">
-                                        <a href="javascript:void(0)">
-                                            <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Admin Tools</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                        <ul class="pcoded-submenu">
-                                            <li class=" ">
-                                                <a asp-page="/admin/staff">
-                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Staff</span>
-                                                    <span class="pcoded-mcaret"></span>
-                                                </a>
-                                            </li>
-                                            <li class=" ">
-                                                <a asp-page="/admin/addstaff">
-                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Add Staff</span>
-                                                    <span class="pcoded-mcaret"></span>
-                                                </a>
-                                            </li>
-                                            <li class=" ">
-                                                <a asp-page="/admin/roles">
-                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">User Roles</span>
-                                                    <span class="pcoded-mcaret"></span>
-                                                </a>
-                                            </li>
-                                            <li class=" ">
-                                                <a asp-page="/admin/manageUserclaims">
-                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">User Claims</span>
-                                                    <span class="pcoded-mcaret"></span>
-                                                </a>
-                                            </li>
-                                            <li class=" ">
-                                                <a asp-page="/student/index">
-                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Students</span>
-                                                    <span class="pcoded-mcaret"></span>
-                                                </a>
-                                            </li>
+            {*@
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Admin Tools</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class=" ">
+                                            <a asp-page="/admin/staff">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Staff</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a asp-page="/admin/addstaff">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Add Staff</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a asp-page="/admin/roles">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">User Roles</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a asp-page="/admin/manageUserclaims">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">User Claims</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a asp-page="/student/index">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Students</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                            @*<li class=" ">
-                            <a asp-page="/patients" >
-                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Patients</span>
-                                <span class="pcoded-mcaret"></span>
-                            </a>
-                        </li>*@
-                                        </ul>
-                                    </li>
+                                        @*<li class=" ">
+                        <a asp-page="/patients" >
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Patients</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>*@
+                                    </ul>
+                                </li>
 
                                 @*}*@
                             </ul>
@@ -237,69 +237,77 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-page="/admin/courseregistration">
+                                    <a asp-page="/student/courseregs">
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>LR</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Course Reg</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                             </ul>
-                            @if (User.IsInRole("Admin") || User.IsInRole("HOD") || User.IsInRole("Examiner") || User.IsInRole("Lecturer"))
-                            {
-                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Result</div>
-                                <ul class="pcoded-item pcoded-left-item">
-                                    <li>
-                                        <a asp-page="/admin/submittedresult">
-                                            <span class="pcoded-micon"><i class="ti-layers"></i><b>Ps</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Submitted Result</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a asp-page="/admin/UploadResult">
-                                            <span class="pcoded-micon"><i class="ti-layers"></i><b>OL</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Result</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
+                            @*@if (User.IsInRole("Admin") || User.IsInRole("HOD") || User.IsInRole("Examiner") || User.IsInRole("Lecturer"))
+        {*@
+                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Result</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li>
+                                    <a asp-page="/admin/submittedresult">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>Ps</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Submitted Result</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-page="/admin/UploadResult">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>OL</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Upload Result</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
 
-                                </ul>
-                            }
-                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Lecturer</div>
-                                <ul class="pcoded-item pcoded-left-item">
-                                    <li>
-                                        <a asp-page="/admin/courseLecturers">
-                                            <span class="pcoded-micon"><i class="ti-layers"></i><b>CL</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Course Lecturer</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other">Students</div>
-                                <ul class="pcoded-item pcoded-left-item">
-                                    <li>
-                                        <a asp-page="/student/index">
-                                            <span class="pcoded-micon"><i class="ti-layers"></i><b>ST</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Students</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a asp-page="/student/mycoursereg">
-                                            <span class="pcoded-micon"><i class="ti-layers"></i><b>CR</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">My Course Reg.</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a asp-page="/student/myresult">
-                                            <span class="pcoded-micon"><i class="ti-layers"></i><b>SR</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">My Result</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            </ul>
+                            @*}*@
+                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Lecturer</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li>
+                                    <a asp-page="/admin/courseLecturers">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>CL</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Course Lecturer</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other">Students</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li>
+                                    <a asp-page="/student/index">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>ST</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Students</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-page="/student/mycoursereg">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>CR</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">My Course Reg.</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-page="/student/myresult">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>SR</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">My Result</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-page="/index">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>LG</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"><strong>Log Out</strong></span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                           
+                        </div>
                     </nav>
                     <div class="pcoded-content">
                         <div class="pcoded-inner-content">

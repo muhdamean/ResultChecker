@@ -3,45 +3,56 @@
 @{
     ViewBag.Title = "My Courses Reg";
     int SN = 0;
+    string Session = null;
+    string Semester = null;
+    string Year = null;
+    @foreach (var item in Model.vwCourses)
+    {
+       
+            Session= item.Session;
+            Semester= item.Semester;
+            Year= item.Year;
+       
+    }
 }
 
-<div class="col-sm-12">
-    @if (Model.applicationUser!=null)
+<div class="col-sm-8">
+    @if (Model.applicationUser != null)
     {
         @*@if (TempData["message"] != null)
-        {
-            <div classs="container p-0 ">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    @TempData["message"]
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+            {
+                <div classs="container p-0 ">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        @TempData["message"]
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        }*@
+            }*@
         @*<form method="post">
-            <div class="row mb-2">
+                <div class="row mb-2">
 
 
-                <div class="col-md-4">
-                    @Html.DropDownListFor(x => Model.Session, new SelectList(Model.SessionList, "Value", "Text", ""), htmlAttributes: new { @class = "form-control", id = "Session" })
-                    <span asp-validation-for="Session" class="text-danger"></span>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(x => Model.Session, new SelectList(Model.SessionList, "Value", "Text", ""), htmlAttributes: new { @class = "form-control", id = "Session" })
+                        <span asp-validation-for="Session" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(x => Model.Semester, new SelectList(Model.SemesterList, "Value", "Text", ""), htmlAttributes: new { @class = "form-control", id = "Semester" })
+                        <span asp-validation-for="Semester" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="submit" value="Print" class="btn btn-sm btn-info" />
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    @Html.DropDownListFor(x => Model.Semester, new SelectList(Model.SemesterList, "Value", "Text", ""), htmlAttributes: new { @class = "form-control", id = "Semester" })
-                    <span asp-validation-for="Semester" class="text-danger"></span>
-                </div>
-                <div class="col-md-4">
-                    <input type="submit" value="Print" class="btn btn-sm btn-info" />
-                </div>
-            </div>
-        </form>*@
+            </form>*@
         <!-- Hover table card start -->
         <div class="card">
             <div class="card-header">
                 <h5>My Course Registration</h5>
                 <span class="txt-muted">List of student registered courses. </span>
-                    <button type="button" onclick="printDiv()" class="btn btn-sm btn-dark d-print-none">Print this Page</button>
+                <button type="button" onclick="" class="btn btn-sm btn-dark d-print-none">Print this Page</button>
                 <div class="card-header-right">
                     <ul class="list-unstyled card-option">
                         <li><i class="fa fa-chevron-left"></i></li>
@@ -58,45 +69,44 @@
                     <table class="table table-hover">
                         <thead>
                             <tr class="text-center">
-                                <td colspan="4">KADUNA POLYTECHNIC</td>
+                                <td colspan="4"><h5><strong>KADUNA POLYTECHNIC</strong></h5></td>
                             </tr>
                             <tr class="text-center">
-                                <td colspan="4">STUDENT COURSE REGISTRATION FORM</td>
+                                <td colspan="4"><h6><strong>STUDENT COURSE REGISTRATION FORM</strong></h6></td>
 
                             </tr>
                         </thead>
                         <tbody>
 
                             <tr>
-                                <td colspan="2">NAME:  @Model.applicationUser.FullName</td>
-                                <td></td>
-                                <td></td>
+                                <td>NAME:  </td>
+
+                                <td>@Model.applicationUser.FullName</td>
                             </tr>
                             <tr>
-                                <td colspan="2">REGISTRATION NO:  @Model.applicationUser.StaffID</td>
-                                <td></td>
-                                <td></td>
+                                <td>REGISTRATION NO:</td>
+                                <td>@Model.applicationUser.StaffID</td>
                             </tr>
                             <tr>
-                                <td colspan="2">SPONSOR'S ADDRESS:  @Model.applicationUser.NOKAddress</td>
-                                <td></td>
-                                <td></td>
+                                <td>SPONSOR'S ADDRESS:</td>
+                                <td>@Model.applicationUser.NOKAddress</td>
+
                             </tr>
+                            @*<tr>
+                                    <td colspan="2">DEPARTMENT:  @Model.applicationUser.Department</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>*@
                             <tr>
-                                <td colspan="2">DEPARTMENT:  @Model.applicationUser.Department</td>
-                                <td></td>
-                                <td></td>
+                                <td>COURSE:</td>
+                                <td> @Model.applicationUser.Department</td>
                             </tr>
+                          
                             <tr>
-                                <td colspan="2">COURSE:  @Model.applicationUser.Department</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+
+                                <td>SESSION: @Session</td>
+                                <td>SEMESTER: @Semester</td>
+                                <td>YEAR: @Year</td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -125,11 +135,10 @@
                                     <td>@item.CourseCode</td>
                                     <td>@item.CourseTitle</td>
                                     <td>@item.CourseUnit</td>
-
                                 </tr>
                             }
                         </tbody>
-                        <tfoot>
+                        <tfoot class="text-center">
                             <tr>
                                 <td></td>
                                 <td></td>
@@ -149,10 +158,10 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Student's Signature</td>
+                                <td></td>
+                                <td colspan="2">Student's Signature & Date</td>
                                 <td></td>
                                 <td></td>
-                                <td>Date</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -174,7 +183,7 @@
     }
 </div>
 
-@section Scripts{ 
+@section Scripts{
 
     <script type="text/javascript">
 

@@ -5,7 +5,7 @@
     int SN = 0;
     int SumUnit = 0;
     int SumPoint = 0;
-    int GPA = 0;
+    double GPA = 0;
 }
 
 <div class="col-sm-12">
@@ -66,8 +66,8 @@
                                     <td>#</td>
                                     <td>CourseCode</td>
                                     <td>Score</td>
+                                    <td>Unit</td>
                                     <td>Grade</td>
-                                    @*<td>GPA</td>*@
                                     <td>Session</td>
                                     <td>Semester</td>
                                 </tr>
@@ -79,38 +79,44 @@
                                         <td>@(++SN)</td>
                                         <td>@user.CourseCode</td>
                                         <td>@user.Score</td>
+                                        <td>@user.Unit</td>
                                         <td>@user.Grade</td>
-                                        @*<td>>@user.GPA</td>*@
                                         <td>@user.Session</td>
                                         <td>@user.Semester</td>
                                     </tr>
                                 }
                             </tbody>
-                            <tfoot>
+                            <tfoot class="mt-2">
+                                <tr>
+                                    <td colspan="6" class="border-bottom-default">
+                                        <hr />
+                                    </td>
+                                </tr>
                                 <tr>
                                     @foreach (var gpa in Model.Results)
                                     {
                                         SumUnit = SumUnit + gpa.Unit;
                                         SumPoint = SumPoint + gpa.Points;
+                                        GPA = Convert.ToDouble(SumPoint) / Convert.ToDouble(SumUnit);
                                     }
                                 </tr>
-                                <tr>
-                                    <td>Total Unit: </td>
-                                    <td>@SumUnit</td>
+
+                                <tr class="mt-2 text-black-50">
+                                    <td><strong>Total Unit: </strong> </td>
+                                    <td><strong> @SumUnit </strong></td>
+                                    <td><strong> Total Points: </strong></td>
+                                    <td><strong> @SumPoint </strong></td>
+                                    <td><strong> GPA: </strong> </td>
+                                    <td><strong> @Math.Round(GPA, 2) </strong> </td>
                                 </tr>
+
                                 <tr>
-                                    <td>Total Points: </td>
-                                    <td>@SumPoint</td>
-                                </tr>
-                                <tr>
-                                    <td>GPA: </td>
-                                    <td>@GPA =(@SumPoint / @SumUnit) </td>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
                 </div>
-            }
+                                        }
         }
         else
         {

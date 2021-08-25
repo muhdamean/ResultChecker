@@ -35,7 +35,7 @@ namespace ResultChecker.Pages.Student
         public List<SelectListItem> SessionList { get; set; }
         [BindProperty(SupportsGet = true)]
         public List<SelectListItem> SemesterList { get; set; }
-        public async void OnGet()
+        public async Task OnGet()
         {
             SemesterList.Insert(0, new SelectListItem() { Text = "----Select Semester----", Value = "0" });
             SemesterList.Insert(1, new SelectListItem() { Text = "First", Value = "First" });
@@ -43,26 +43,30 @@ namespace ResultChecker.Pages.Student
             SessionList =  dbContext.SessionSemesters.Select(x => new SelectListItem() { Text = x.Session, Value = x.Session }).Distinct().OrderByDescending(x => x.Value).ToList();
             SessionList.Insert(0, new SelectListItem() { Text = "----Select Session----", Value = string.Empty });
 
-            var user = await userManager.FindByEmailAsync(User.Identity.Name.ToString());
+            var user = await userManager.FindByEmailAsync(User.Identity.Name);
             if (user == null)
             {
 
             }
             if (TempData["result"]!=null)
             {
-                Results = dbContext.vwUploadedResults.FromSqlRaw("Select * from vwresultupload").ToList().Where(x => x.MatNo == user.StaffID.Trim() && x.Semester == vwUploadedResults.Semester && x.Session == vwUploadedResults.Session);
+                Results = dbContext.vwUploadedResults.FromSqlRaw("Select * from vwresultupload").ToList().Where(x => x.MatNo == user.StaffID.Trim() && x.Semester == TempData["semester"].ToString() && x.Session == TempData["session"].ToString());
+               // TempData["message"] = TempData["semester"].ToString() + " " + TempData["session"].ToString();
             }
+            
         }
         public async Task<IActionResult> OnPost()
         {
-            var user =await userManager.FindByEmailAsync(User.ToString());
+            var user =await userManager.FindByEmailAsync(User.Identity.Name);
             if (user==null)
             {
 
             }
             Results = dbContext.vwUploadedResults.FromSqlRaw("Select * from vwresultupload").ToList().Where(x => x.MatNo == user.StaffID.Trim() && x.Semester == vwUploadedResults.Semester && x.Session == vwUploadedResults.Session);
             TempData["result"] = "result check successful";
-            return Page();
+            TempData["session"] = vwUploadedResults.Session;
+            TempData["semester"] = vwUploadedResults.Semester;
+            return RedirectToPage("myResult");
         }
     }
 }
